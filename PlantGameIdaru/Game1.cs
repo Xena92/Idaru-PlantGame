@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 namespace PlantGameIdaru
 {
@@ -12,27 +13,8 @@ namespace PlantGameIdaru
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Vector2 plantPosition = new Vector2(300, 300);
-        Vector2 potPosition = new Vector2(300, 300);
         Texture2D gardenBackground;
-        Texture2D plantStage0;
-        Texture2D plantStage1;
-        Texture2D plantStage2;
-        Texture2D plantStage3;
-        Texture2D plantStage4;
-        Texture2D plantStage5;
-        private double timeElapsed;
-        private const int FIVE_SECONDS = 5000;
-        private const int TEN_SECOUNDS = 10000;
-        private const int TWENTY_SECONDS = 20000;
-        private const int THIRTY_SECONDS = 30000;
-        private const int FOURTY_SECONDS = 40000;
-        private const int FIFTY_SECONDS = 50000;
-        KeyboardState state = Keyboard.GetState();
-        bool isCButtonPressed = false;
-        private Pot _pot;
-        
-        
+        private List<Pot> _potList; 
 
         public Game1()
             : base()
@@ -53,6 +35,7 @@ namespace PlantGameIdaru
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            _potList = new List<Pot>();
 
             base.Initialize();
         }
@@ -63,19 +46,25 @@ namespace PlantGameIdaru
         /// </summary>
         protected override void LoadContent()
         {
-            _pot = new RegularBrownPot();
+            _potList.Add(new RegularBrownPot(new Vector2(300, 300), Content));
+            _potList.Add(new RegularBrownPot(new Vector2(450, 300), Content));
+            _potList.Add(new RegularBrownPot(new Vector2(600, 300), Content));
+            _potList.Add(new RegularBrownPot(new Vector2(750, 300), Content));
+            _potList.Add(new RegularBrownPot(new Vector2(300, 450), Content));
+            _potList.Add(new RegularBrownPot(new Vector2(450, 450), Content));
+            _potList.Add(new RegularBrownPot(new Vector2(600, 450), Content));
+            _potList.Add(new RegularBrownPot(new Vector2(750, 450), Content));
+            _potList[0].AddBananaPlant(Content);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
             gardenBackground = this.Content.Load<Texture2D>("Pictures/Backgrounds/Garden.png");
-            plantStage0 = this.Content.Load<Texture2D>("Pictures/Plants/PlantStage0.png");
-            plantStage1 = this.Content.Load<Texture2D>("Pictures/Plants/PlantStage1.png");
-            plantStage2 = this.Content.Load<Texture2D>("Pictures/Plants/PlantStage2.png");
-            plantStage3 = this.Content.Load<Texture2D>("Pictures/Plants/PlantStage3.png");
-            plantStage4 = this.Content.Load<Texture2D>("Pictures/Plants/PlantStage4.png");
-            plantStage5 = this.Content.Load<Texture2D>("Pictures/Plants/PlantStage5.png");
 
-            _pot.LoadContent(this.Content);
+            foreach (Pot p in _potList)
+            {
+                p.LoadContent(this.Content);
+            }
 
         }
 
@@ -99,6 +88,10 @@ namespace PlantGameIdaru
                 Exit();
 
             // TODO: Add your update logic here
+            foreach (Pot p in _potList)
+            {
+                p.Update(gameTime);
+            }
 
             base.Update(gameTime);
         }
@@ -112,34 +105,16 @@ namespace PlantGameIdaru
             GraphicsDevice.Clear(Color.CornflowerBlue);
             
 
-            timeElapsed += gameTime.ElapsedGameTime.Milliseconds;
-            Console.WriteLine(timeElapsed);
             // TODO: Add your drawing code here
             spriteBatch.Begin();
             
             spriteBatch.Draw(gardenBackground, new Rectangle(0,0, 1024, 768), Color.White);
-            _pot.Draw(gameTime, spriteBatch);
 
-            if(state.IsKeyDown(Keys.C) == true)
-                isCButtonPressed = true;
-
-            if(isCButtonPressed == true){
-                if (timeElapsed >= FIFTY_SECONDS)
-                    spriteBatch.Draw(plantStage5, new Rectangle((int)plantPosition.X, (int)plantPosition.Y, plantStage5.Width * 2, plantStage5.Height * 2), Color.White);
-                else if (timeElapsed >= FOURTY_SECONDS)
-                    spriteBatch.Draw(plantStage4, new Rectangle((int)plantPosition.X, (int)plantPosition.Y, plantStage4.Width * 2, plantStage4.Height * 2), Color.White);
-                else if (timeElapsed >= THIRTY_SECONDS)
-                    spriteBatch.Draw(plantStage3, new Rectangle((int)plantPosition.X, (int)plantPosition.Y, plantStage3.Width * 2, plantStage3.Height * 2), Color.White);
-                else if (timeElapsed >= TWENTY_SECONDS)
-                    spriteBatch.Draw(plantStage2, new Rectangle((int)plantPosition.X, (int)plantPosition.Y, plantStage2.Width * 2, plantStage2.Height * 2), Color.White);
-                else if (timeElapsed >= TEN_SECOUNDS)
-                    spriteBatch.Draw(plantStage1, new Rectangle((int)plantPosition.X, (int)plantPosition.Y, plantStage1.Width * 2, plantStage1.Height * 2), Color.White);
-                else if (timeElapsed >= FIVE_SECONDS)
-                    spriteBatch.Draw(plantStage0, new Rectangle((int)plantPosition.X, (int)plantPosition.Y, plantStage0.Width * 2, plantStage0.Height * 2), Color.White);
+            foreach (Pot p in _potList)
+            {
+                p.Draw(gameTime, spriteBatch);
             }
 
-
-            
             spriteBatch.End();
 
             

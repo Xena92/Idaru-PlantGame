@@ -38,6 +38,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BananaPlant.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Plant.cs" />
     <Compile Include="Pot.cs" />
