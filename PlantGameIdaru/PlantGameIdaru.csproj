@@ -89,6 +89,9 @@
     <Content Include="Content\Pictures\Plants\Plantstage1.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Pictures\Plants\Seeds\BananaSeed.png" />
+    <Content Include="Content\Pictures\Plants\Seeds\CarrotSeed.png" />
+    <Content Include="Content\Pictures\Plants\Seeds\SteakSeed.png" />
     <Content Include="Content\Pictures\Plants\Steak\Plantstage2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -123,6 +126,9 @@
     <None Include="Content\Pictures\Plants\Carrot\Plantstage5.pdn" />
     <None Include="Content\Pictures\Plants\Plantstage0.pdn" />
     <None Include="Content\Pictures\Plants\Plantstage1.pdn" />
+    <None Include="Content\Pictures\Plants\Seeds\BananaSeed.pdn" />
+    <None Include="Content\Pictures\Plants\Seeds\CarrotSeed.pdn" />
+    <None Include="Content\Pictures\Plants\Seeds\SteakSeed.pdn" />
     <None Include="Content\Pictures\Plants\Steak\Plantstage2.pdn" />
     <None Include="Content\Pictures\Plants\Steak\Plantstage3.pdn" />
     <None Include="Content\Pictures\Plants\Steak\Plantstage4.pdn" />
