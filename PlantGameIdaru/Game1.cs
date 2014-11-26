@@ -55,6 +55,8 @@ namespace PlantGameIdaru
             _potList.Add(new RegularBrownPot(new Vector2(600, 450), Content));
             _potList.Add(new RegularBrownPot(new Vector2(750, 450), Content));
             _potList[0].AddBananaPlant(Content);
+            _potList[1].AddCarrotPlant(Content);
+            _potList[2].AddSteakPlant(Content);
 
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -106,7 +108,7 @@ namespace PlantGameIdaru
             
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
             
             spriteBatch.Draw(gardenBackground, new Rectangle(0,0, 1024, 768), Color.White);
 

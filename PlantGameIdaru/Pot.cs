@@ -32,6 +32,18 @@ namespace PlantGameIdaru
             _plant.LoadContent(content);
         }
 
+        public void AddCarrotPlant(ContentManager content)
+        {
+            _plant = new CarrotPlant(_potPosition);
+            _plant.LoadContent(content);
+        }
+
+        public void AddSteakPlant(ContentManager content)
+        {
+            _plant = new SteakPlant(_potPosition);
+            _plant.LoadContent(content);
+        }
+
         public bool IsMouseWithinPotPosition()
         {
             if (Mouse.GetState().Position.X >= _potPosition.X && Mouse.GetState().Position.Y >= _potPosition.Y &&
